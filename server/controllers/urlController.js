@@ -35,7 +35,9 @@ exports.shortenUrl = async (req, res) => {
 
     // Check if URL is already shortened and exists in database
     let urlEntry = await Url.findOne({ longUrl });
-    const baseUrl = process.env.BASE_URL || "http://localhost:5000";
+    const host = req.get("host");
+    const protocol = req.protocol;
+    const baseUrl = process.env.BASE_URL || `${protocol}://${host}`;
 
     if (urlEntry) {
       return res.status(200).json({
