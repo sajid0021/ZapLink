@@ -9,6 +9,9 @@ const urlRoutes = require("./routes/urlRoutes");
 
 const app = express();
 
+// Trust proxy headers for HTTPS on serverless deployments (Vercel)
+app.set("trust proxy", true);
+
 // Connect Database
 connectDB();
 
